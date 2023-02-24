@@ -10,8 +10,7 @@ class ItemService {
       BuildContext context, Map<String, dynamic> data, String documentName) {
     return FirebaseFirestore.instance
         .collection('item')
-        .doc(documentName)
-        .set(data)
+        .add(data)
         .then((value) {
       showMessageBox(
           context, "Success", "Added item($documentName) to Firestore",

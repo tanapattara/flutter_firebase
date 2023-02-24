@@ -41,11 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
         context, MaterialPageRoute(builder: (context) => NewItemScreen()));
   }
 
-  void _editItem(String name, String description) {
+  void _editItem(String documentId, String name, String description) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => EditeItemScreen(name, description)));
+            builder: (context) =>
+                EditeItemScreen(documentId, name, description)));
   }
 
   @override
@@ -67,13 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
           return ListView.builder(
               itemCount: itemSnapshot.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => _editItem(itemSnapshot[index]["name"],
+                return ListTile(
+                  title: Text(itemSnapshot[index]["name"]),
+                  subtitle: Text(itemSnapshot[index]["description"]),
+                  onTap: () => _editItem(
+                      itemSnapshot[index].id,
+                      itemSnapshot[index]["name"],
                       itemSnapshot[index]["description"]),
-                  child: ListTile(
-                    title: Text(itemSnapshot[index]["name"]),
-                    subtitle: Text(itemSnapshot[index]["description"]),
-                  ),
                 );
               });
         },

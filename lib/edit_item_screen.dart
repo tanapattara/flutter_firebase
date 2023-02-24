@@ -5,7 +5,8 @@ import 'components/message_dialog.dart';
 import 'services/logger_service.dart';
 
 class EditeItemScreen extends StatefulWidget {
-  EditeItemScreen(this.name, this.description);
+  EditeItemScreen(this.documentId, this.name, this.description);
+  String documentId;
   String name;
   String description;
   @override
@@ -89,7 +90,7 @@ class _EditeItemScreenState extends State<EditeItemScreen> {
                 "name": itemNameController.text,
                 "description": itemDescriptionController.text
               },
-              itemNameController.text)
+              widget.documentId)
           .then((value) => Navigator.pop(context));
       itemNameController.text = "";
       itemDescriptionController.text = "";
@@ -104,7 +105,7 @@ class _EditeItemScreenState extends State<EditeItemScreen> {
       logger.e("item name or item description can't be null");
     } else {
       iService
-          .deleteItem(context, itemNameController.text)
+          .deleteItem(context, widget.documentId)
           .then((value) => Navigator.pop(context));
       itemNameController.text = "";
       itemDescriptionController.text = "";
